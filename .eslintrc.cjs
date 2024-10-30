@@ -20,6 +20,7 @@ module.exports = {
           ["@pages", "./src/pages"],
           ["@hooks", "./src/hooks"],
           ["@router", "./src/router"],
+          ["@helpers", "./src/helpers"],
         ],
         extensions: [".js", ".jsx", ".ts", ".tsx"],
       },
