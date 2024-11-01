@@ -1,5 +1,5 @@
 import Registration, { RegistrationStatus } from "~/types/registration";
-import { post } from "./axios";
+import { get, post } from "./axios";
 
 const RegistrationService = {
   postNewRegistration(newRegister: Registration) {
@@ -7,6 +7,14 @@ const RegistrationService = {
     const requestData = { ...newRegister, status: RegistrationStatus.REVIEW };
 
     return post(url, requestData)
+      .then((response) => response)
+      .catch((error) => {
+        throw error;
+      });
+  },
+  getRegistrationsList() {
+    const url = `/registrations`;
+    return get(url, {})
       .then((response) => response)
       .catch((error) => {
         throw error;

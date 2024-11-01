@@ -1,36 +1,37 @@
-
 import * as S from "./styles";
 import RegistrationCard from "../RegistrationCard";
 
 const allColumns = [
-  { status: 'REVIEW', title: "Pronto para revisar" },
-  { status: 'APPROVED', title: "Aprovado" },
-  { status: 'REPROVED', title: "Reprovado" },
+  { status: "REVIEW", title: "Pronto para revisar" },
+  { status: "APPROVED", title: "Aprovado" },
+  { status: "REPROVED", title: "Reprovado" },
 ];
 
 type Props = {
   registrations?: any[];
 };
-const Collumns = (props: Props) => {
+const Collumnns = (props: Props) => {
   return (
     <S.Container>
-      {allColumns.map((collum) => {
+      {allColumns.map((collumn) => {
         return (
-          <S.Column status={collum.status} key={collum.title}>
+          <S.Column status={collumn.status} key={collumn.title}>
             <>
-              <S.TitleColumn status={collum.status}>
-                {collum.title}
+              <S.TitleColumn status={collumn.status}>
+                {collumn.title}
               </S.TitleColumn>
-              <S.CollumContent>
+              <S.CollumnContent>
                 {props?.registrations?.map((registration) => {
                   return (
-                    <RegistrationCard
-                      data={registration}
-                      key={registration.id}
-                    />
+                    registration.status === collumn.status && (
+                      <RegistrationCard
+                        data={registration}
+                        key={registration.id}
+                      />
+                    )
                   );
                 })}
-              </S.CollumContent>
+              </S.CollumnContent>
             </>
           </S.Column>
         );
@@ -38,4 +39,4 @@ const Collumns = (props: Props) => {
     </S.Container>
   );
 };
-export default Collumns;
+export default Collumnns;
