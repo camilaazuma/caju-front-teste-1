@@ -32,7 +32,9 @@ const TextField = ({ label, error, errorMessage, ...rest }: Props) => {
       <label htmlFor={rest.id}>{label}</label>
       <Input {...rest} />
       {error && (
-        <span style={{ fontSize: 12, color: "red" }}>{errorMessage}</span>
+        <span style={{ fontSize: 12, color: "red" }} role="alert">
+          {errorMessage}
+        </span>
       )}
     </div>
   );

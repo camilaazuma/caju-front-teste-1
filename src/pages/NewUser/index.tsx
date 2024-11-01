@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { validateCPF } from "@helpers/fiscalDocumentHelper";
 import MaskHelper from "@helpers/maskHelper";
+import RegistrationService from "~/services/registrationService";
 
 const NewUserSchema = Yup.object().shape({
   name: Yup.string()
@@ -49,7 +50,13 @@ const NewUserPage = () => {
     initialValues: emptyData,
     validationSchema: NewUserSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      const registrationData = {
+        admissionDate: values.admission_date,
+        employeeName: values.name,
+        cpf: values.fiscal_document,
+        email: values.email,
+      };
+      await RegistrationService.postNewRegistration(registrationData);
     },
   });
 
@@ -71,6 +78,7 @@ const NewUserPage = () => {
               value={formik.values.name}
               error={formik.touched.name && formik.errors.name}
               errorMessage={formik.errors.name}
+              aria-invalid={formik.touched.name && formik.errors.name !== ""}
             />
             <TextField
               id="email"
@@ -82,6 +90,7 @@ const NewUserPage = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
+              aria-invalid={formik.touched.email && formik.errors.email !== ""}
             />
             <TextField
               id="fiscal_document"
@@ -94,6 +103,10 @@ const NewUserPage = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={MaskHelper.cpf(String(formik?.values?.fiscal_document))}
+              aria-invalid={
+                formik.touched.fiscal_document &&
+                formik.errors.fiscal_document !== ""
+              }
             />
             <TextField
               id="admission_date"
@@ -106,15 +119,18 @@ const NewUserPage = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.admission_date}
+              aria-invalid={
+                formik.touched.admission_date &&
+                formik.errors.admission_date !== ""
+              }
             />
           </div>
           <Button
             type="submit"
-            onClick={() => {}}
-            disabled={
-              (formik.dirty && !formik.isValid) ||
-              (!formik.dirty && !formik.isValid)
-            }
+            // disabled={
+            //   (formik.dirty && !formik.isValid) ||
+            //   (!formik.dirty && !formik.isValid)
+            // }
           >
             Cadastrar
           </Button>

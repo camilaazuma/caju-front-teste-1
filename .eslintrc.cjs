@@ -21,6 +21,7 @@ module.exports = {
           ["@hooks", "./src/hooks"],
           ["@router", "./src/router"],
           ["@helpers", "./src/helpers"],
+          ["@types", "./src/types"],
         ],
         extensions: [".js", ".jsx", ".ts", ".tsx"],
       },
