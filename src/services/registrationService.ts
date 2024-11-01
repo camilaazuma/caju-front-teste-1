@@ -6,7 +6,11 @@ const RegistrationService = {
     const url = `/registrations`;
     const requestData = { ...newRegister, status: RegistrationStatus.REVIEW };
 
-    return post(url, requestData).then((response) => response);
+    return post(url, requestData)
+      .then((response) => response)
+      .catch((error) => {
+        throw error;
+      });
   },
 };
 

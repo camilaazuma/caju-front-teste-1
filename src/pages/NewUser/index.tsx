@@ -1,8 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import TextField from "@components/TextField";
-import Button from "@components/Buttons";
-import { IconButton } from "@components/Buttons/IconButton";
+import { Button, IconButton, Loading, TextField } from "@components/index";
 import routes from "@router/routes";
 import * as S from "./styles";
 import * as Yup from "yup";
@@ -10,6 +8,8 @@ import { useFormik } from "formik";
 import { validateCPF } from "@helpers/fiscalDocumentHelper";
 import MaskHelper from "@helpers/maskHelper";
 import RegistrationService from "~/services/registrationService";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const NewUserSchema = Yup.object().shape({
   name: Yup.string()
@@ -39,6 +39,8 @@ const NewUserPage = () => {
     history.push(routes.dashboard);
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const emptyData = {
     name: "",
     email: "",
@@ -50,13 +52,22 @@ const NewUserPage = () => {
     initialValues: emptyData,
     validationSchema: NewUserSchema,
     onSubmit: async (values) => {
+      setIsLoading(true);
       const registrationData = {
         admissionDate: values.admission_date,
         employeeName: values.name,
         cpf: values.fiscal_document,
         email: values.email,
       };
-      await RegistrationService.postNewRegistration(registrationData);
+      RegistrationService.postNewRegistration(registrationData)
+        .then(() => {
+          setIsLoading(false);
+          toast.success("Nova admissão criada.");
+          goToHome();
+        })
+        .catch((error) => {
+          toast.error(`Houve um erro ao salvar os dados. ${error.code}`);
+        });
     },
   });
 
@@ -125,14 +136,8 @@ const NewUserPage = () => {
               }
             />
           </div>
-          <Button
-            type="submit"
-            // disabled={
-            //   (formik.dirty && !formik.isValid) ||
-            //   (!formik.dirty && !formik.isValid)
-            // }
-          >
-            Cadastrar
+          <Button type="submit">
+            {isLoading ? <Loading color="#fff" /> : "Cadastrar"}
           </Button>
         </form>
       </S.Card>
