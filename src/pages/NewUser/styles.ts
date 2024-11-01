@@ -10,6 +10,12 @@ export const Container = styled.div`
   gap: 16px;
 `;
 
+export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
 export const Card = styled.div`
   border: 2px solid #f0f0f0;
   width: 500px;

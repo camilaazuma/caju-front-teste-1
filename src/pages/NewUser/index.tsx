@@ -79,7 +79,7 @@ const NewUserPage = () => {
         </IconButton>
 
         <form onSubmit={formik.handleSubmit}>
-          <div>
+          <S.FormContainer>
             <TextField
               id="name"
               placeholder="Nome completo"
@@ -135,10 +135,10 @@ const NewUserPage = () => {
                 formik.errors.admission_date !== ""
               }
             />
-          </div>
-          <Button type="submit">
-            {isLoading ? <Loading color="#fff" /> : "Cadastrar"}
-          </Button>
+            <Button type="submit">
+              {isLoading ? <Loading color="#fff" /> : "Cadastrar"}
+            </Button>
+          </S.FormContainer>
         </form>
       </S.Card>
     </S.Container>
