@@ -3,9 +3,12 @@ import * as S from "./styles";
 import { SearchBar } from "./components/Searchbar";
 import useFetchRegistrations from "@hooks/useFetchRegistrations";
 import { Loading } from "~/components";
+import { useState } from "react";
 
 const DashboardPage = () => {
-  const { data, loading } = useFetchRegistrations("/registrations");
+  const [cpf, setCpf] = useState<string>("");
+
+  const { data, loading } = useFetchRegistrations(cpf);
 
   if (loading) {
     return <Loading />;
@@ -15,7 +18,11 @@ const DashboardPage = () => {
   }
   return (
     <S.Container>
-      <SearchBar />
+      <SearchBar
+        searchString={cpf}
+        setSearchString={setCpf}
+        onRefetch={() => console.log("refetch")}
+      />
       <Collumns registrations={data} />
     </S.Container>
   );

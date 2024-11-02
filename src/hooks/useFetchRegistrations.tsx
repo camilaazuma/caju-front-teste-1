@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react";
 import RegistrationService from "~/services/registrationService";
 
-const useFetchRegistrations = (url: string) => {
+const useFetchRegistrations = (cpf: string = "") => {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        RegistrationService.getRegistrationsList().then((response) => {
-          setData(response);
-        });
+        if (cpf !== "") {
+          RegistrationService.queryRegistrationsByCpf(cpf).then((response) => {
+            setData(response);
+          });
+        } else {
+          RegistrationService.getRegistrationsList().then((response) => {
+            setData(response);
+          });
+        }
       } catch (error) {
         console.error("API request failed", error);
       } finally {
@@ -19,7 +25,7 @@ const useFetchRegistrations = (url: string) => {
     };
 
     fetchData();
-  }, [url]);
+  }, [cpf]);
 
   return { data, loading };
 };

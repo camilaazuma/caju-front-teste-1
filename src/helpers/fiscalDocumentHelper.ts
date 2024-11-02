@@ -54,3 +54,7 @@ export const validateCPF = (cpf: string): boolean => {
 
   return true;
 };
+
+export const sanitizeCPF = (cpf: string): string => {
+  return cpf.replace(/\.|-|\//g, "");
+};
