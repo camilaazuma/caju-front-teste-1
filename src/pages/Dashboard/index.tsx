@@ -8,7 +8,7 @@ import { useState } from "react";
 const DashboardPage = () => {
   const [cpf, setCpf] = useState<string>("");
 
-  const { data, loading } = useFetchRegistrations(cpf);
+  const { data, loading, refetch } = useFetchRegistrations(cpf);
 
   if (loading) {
     return <Loading />;
@@ -21,7 +21,7 @@ const DashboardPage = () => {
       <SearchBar
         searchString={cpf}
         setSearchString={setCpf}
-        onRefetch={() => console.log("refetch")}
+        onRefetch={refetch}
       />
       <Collumns registrations={data} />
     </S.Container>
