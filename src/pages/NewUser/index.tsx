@@ -10,6 +10,7 @@ import MaskHelper from "@helpers/maskHelper";
 import RegistrationService from "~/services/registrationService";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { formatDate } from "@helpers/dateHelper";
 
 const NewUserSchema = Yup.object().shape({
   name: Yup.string()
@@ -54,7 +55,7 @@ const NewUserPage = () => {
     onSubmit: async (values) => {
       setIsLoading(true);
       const registrationData = {
-        admissionDate: values.admission_date,
+        admissionDate: formatDate(values.admission_date),
         employeeName: values.name,
         cpf: values.fiscal_document,
         email: values.email,

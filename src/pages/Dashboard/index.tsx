@@ -1,4 +1,4 @@
-import Collumns from "./components/Columns";
+import Columns from "./components/Columns";
 import * as S from "./styles";
 import { SearchBar } from "./components/Searchbar";
 import useFetchRegistrations from "@hooks/useFetchRegistrations";
@@ -23,7 +23,7 @@ const DashboardPage = () => {
         setSearchString={setCpf}
         onRefetch={refetch}
       />
-      <Collumns registrations={data} />
+      <Columns registrations={data} />
     </S.Container>
   );
 };

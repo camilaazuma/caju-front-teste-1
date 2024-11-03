@@ -4,6 +4,7 @@ export default interface Registration {
   employeeName: string;
   status?: string;
   cpf: string;
+  id?: string;
 }
 
 export enum RegistrationStatus {
