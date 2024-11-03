@@ -31,7 +31,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     setCpf(maskedCpf);
     const valid = validateCPF(maskedCpf);
     setIsValid(valid);
-    setSearchString(valid ? maskedCpf : "");
+    if (valid) {
+      setSearchString(maskedCpf);
+    }
+    if (maskedCpf === "") {
+      setSearchString("");
+    }
   };
 
   return (
@@ -41,7 +46,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         value={cpf}
         onChange={handleInputChange}
         error={!isValid}
-        errorMessage={!isValid ? "CPF inválido" : ""}
+        errorMessage={!isValid && cpf.length === 14 ? "CPF inválido" : ""}
       />
       <S.Actions>
         <IconButton aria-label="refetch" onClick={onRefetch}>
