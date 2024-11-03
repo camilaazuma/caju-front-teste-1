@@ -1,11 +1,13 @@
 import { InputHTMLAttributes } from "react";
 import styled from "styled-components";
 
-export const Input = styled.input`
+export const Input = styled.input<{
+  width?: number | string | undefined;
+}>`
   padding: 0 8px;
   vertical-align: middle;
   border-radius: 2px;
-  width: 100%;
+  width: ${(props) => props.width ?? ""};
   min-height: 36px;
   background-color: #ffffff;
   border: 1px solid rgba(36, 28, 21, 0.3);
@@ -20,6 +22,10 @@ export const Input = styled.input`
     box-shadow: inset 0 0 0 1px #007c89;
   }
 `;
+Input.defaultProps = {
+  width: "100%",
+};
+
 type Props = {
   label?: string;
   error?: string | boolean;

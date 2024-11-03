@@ -1,4 +1,4 @@
-import { HiRefresh } from "react-icons/hi";
+import { HiRefresh, HiX } from "react-icons/hi";
 import { useHistory } from "react-router-dom";
 import { Button, IconButton, TextField } from "@components/index";
 import routes from "@router/routes";
@@ -38,16 +38,35 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       setSearchString("");
     }
   };
+  const clearSearch = () => {
+    if (isValid) {
+      setSearchString("");
+    }
+    setCpf("");
+  };
 
   return (
     <S.Container>
-      <TextField
-        placeholder="Digite um CPF válido"
-        value={cpf}
-        onChange={handleInputChange}
-        error={!isValid}
-        errorMessage={!isValid && cpf.length === 14 ? "CPF inválido" : ""}
-      />
+      <S.SearchBarContainer>
+        <TextField
+          placeholder="Digite um CPF válido"
+          value={cpf}
+          onChange={handleInputChange}
+          error={!isValid}
+          errorMessage={!isValid && cpf.length === 14 ? "CPF inválido" : ""}
+          width="auto"
+        />
+        <IconButton
+          aria-label="refetch"
+          onClick={clearSearch}
+          color="#e80537"
+          aria-disabled={cpf.length === 0}
+          disabled={cpf.length === 0}
+        >
+          <HiX />
+        </IconButton>
+      </S.SearchBarContainer>
+
       <S.Actions>
         <IconButton aria-label="refetch" onClick={onRefetch}>
           <HiRefresh />
