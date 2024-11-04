@@ -29,6 +29,17 @@ const RegistrationCard = ({ data }: Props) => {
       });
   };
 
+  const deleteCard = (id: string) => {
+    RegistrationService.deleteRegistration(id)
+      .then(async () => {
+        await refetch();
+        toast.success("Registro excluído");
+      })
+      .catch((error) => {
+        toast.error(`Houve um erro ao remover o card. ${error.code}`);
+      });
+  };
+
   return (
     <S.Card key={data.id}>
       <S.IconAndText>
@@ -75,7 +86,11 @@ const RegistrationCard = ({ data }: Props) => {
           )}
         </div>
 
-        <IconButton aria-label="delete card" onClick={refetch} color="#000">
+        <IconButton
+          aria-label="delete card"
+          onClick={() => deleteCard(data.id ?? "")}
+          color="#000"
+        >
           <HiOutlineTrash size={16} />
         </IconButton>
       </S.Actions>

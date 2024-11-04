@@ -1,5 +1,5 @@
 import { Registration, RegistrationStatus } from "~/types/registration";
-import { get, post, put } from "./axios";
+import { get, post, put, remove } from "./axios";
 import { sanitizeCPF } from "@helpers/fiscalDocumentHelper";
 
 const RegistrationService = {
@@ -43,6 +43,15 @@ const RegistrationService = {
   queryRegistrationsByCpf(cpf: string) {
     const url = `/registrations?cpf=${sanitizeCPF(cpf)}`;
     return get(url, {})
+      .then((response) => response)
+      .catch((error) => {
+        throw error;
+      });
+  },
+
+  deleteRegistration(id: string) {
+    const url = `/registrations/${id}`;
+    return remove(url, {})
       .then((response) => response)
       .catch((error) => {
         throw error;
