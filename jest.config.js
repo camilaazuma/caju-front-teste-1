@@ -15,5 +15,6 @@ export default {
     "^@router/(.*)$": "<rootDir>/src/router/$1",
     "^@helpers/(.*)$": "<rootDir>/src/helpers/$1",
     "^@types/(.*)$": "<rootDir>/src/types/$1",
+    "^@context/(.*)$": "<rootDir>/src/context/$1",
   },
 };

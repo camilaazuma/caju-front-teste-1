@@ -4,8 +4,8 @@ import {
   HiOutlineCalendar,
   HiOutlineTrash,
 } from "react-icons/hi";
-import Registration, { RegistrationStatus } from "~/types/registration";
-import { ButtonSmall, IconButton } from "@components/index";
+import { Registration, RegistrationStatus } from "~/types/registration";
+import { ButtonSmall, IconButton } from "@components";
 import * as S from "./styles";
 
 type Props = {

@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import { Button, IconButton, Loading, TextField } from "@components/index";
+import { Button, IconButton, Loading, TextField } from "@components";
 import routes from "@router/routes";
 import * as S from "./styles";
 import * as Yup from "yup";

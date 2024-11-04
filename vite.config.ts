@@ -18,6 +18,7 @@ export default defineConfig({
       "@router": path.resolve(__dirname, "./src/router"),
       "@helpers": path.resolve(__dirname, "./src/helpers"),
       "@types": path.resolve(__dirname, "./src/types"),
+      "@context": path.resolve(__dirname, "./src/context"),
     },
   },
 });
