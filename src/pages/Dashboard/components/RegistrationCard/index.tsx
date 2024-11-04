@@ -6,7 +6,7 @@ import {
 } from "react-icons/hi";
 import { Registration, RegistrationStatus } from "~/types/registration";
 import { ButtonSmall, IconButton } from "@components/index";
-import { useRegistrationContext } from "@context/index";
+import { useLoadingContext, useRegistrationContext } from "@context/index";
 import * as S from "./styles";
 import RegistrationService from "~/services/registrationService";
 import { toast } from "react-toastify";
@@ -17,15 +17,19 @@ type Props = {
 
 const RegistrationCard = ({ data }: Props) => {
   const { refetch } = useRegistrationContext();
+  const { setAppLoading } = useLoadingContext();
 
   const updateCardStatus = (data: Registration, status: RegistrationStatus) => {
+    setAppLoading(true);
     RegistrationService.updateRegistrationStatus(data, status)
       .then(async () => {
         await refetch();
         toast.success("Status atualizado");
+        setAppLoading(false);
       })
       .catch((error) => {
         toast.error(`Houve um erro ao atualizar o status. ${error.code}`);
+        setAppLoading(false);
       });
   };
 

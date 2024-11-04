@@ -2,20 +2,18 @@ import Columns from "./components/Columns";
 import * as S from "./styles";
 import { SearchBar } from "./components/Searchbar";
 import useFetchRegistrations from "@hooks/useFetchRegistrations";
-import { Loading } from "~/components";
-import { useState } from "react";
-import { RegistrationProvider } from "@context/index";
+import { useEffect, useState } from "react";
+import { RegistrationProvider, useLoadingContext } from "@context/index";
 
 const DashboardPage = () => {
   const [cpf, setCpf] = useState<string>("");
   const { data, loading, refetch } = useFetchRegistrations(cpf);
+  const { setAppLoading } = useLoadingContext();
 
-  if (loading) {
-    return <Loading />;
-  }
-  if (!data) {
-    return <div>No registrations found.</div>;
-  }
+  useEffect(() => {
+    setAppLoading(loading);
+  }, [loading, setAppLoading]);
+
   return (
     <RegistrationProvider onRefetch={refetch} cpf={cpf} setCpf={setCpf}>
       <S.Container>

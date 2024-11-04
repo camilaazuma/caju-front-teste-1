@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import { Button, IconButton, Loading, TextField } from "@components";
+import { Button, IconButton, TextField } from "@components/index";
 import routes from "@router/routes";
 import * as S from "./styles";
 import * as Yup from "yup";
@@ -8,9 +8,9 @@ import { useFormik } from "formik";
 import { validateCPF } from "@helpers/fiscalDocumentHelper";
 import MaskHelper from "@helpers/maskHelper";
 import RegistrationService from "~/services/registrationService";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import { formatDate } from "@helpers/dateHelper";
+import { useLoadingContext } from "@context/index";
 
 const NewUserSchema = Yup.object().shape({
   name: Yup.string()
@@ -36,11 +36,11 @@ const NewUserSchema = Yup.object().shape({
 
 const NewUserPage = () => {
   const history = useHistory();
+  const { setAppLoading } = useLoadingContext();
+
   const goToHome = () => {
     history.push(routes.dashboard);
   };
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const emptyData = {
     name: "",
@@ -53,7 +53,7 @@ const NewUserPage = () => {
     initialValues: emptyData,
     validationSchema: NewUserSchema,
     onSubmit: async (values) => {
-      setIsLoading(true);
+      setAppLoading(true);
       const registrationData = {
         admissionDate: formatDate(values.admission_date),
         employeeName: values.name,
@@ -62,12 +62,13 @@ const NewUserPage = () => {
       };
       RegistrationService.postNewRegistration(registrationData)
         .then(() => {
-          setIsLoading(false);
           toast.success("Nova admissão criada.");
+          setAppLoading(false);
           goToHome();
         })
         .catch((error) => {
           toast.error(`Houve um erro ao salvar os dados. ${error.code}`);
+          setAppLoading(false);
         });
     },
   });
@@ -136,9 +137,7 @@ const NewUserPage = () => {
                 formik.errors.admission_date !== ""
               }
             />
-            <Button type="submit">
-              {isLoading ? <Loading color="#fff" /> : "Cadastrar"}
-            </Button>
+            <Button type="submit">{"Cadastrar"}</Button>
           </S.FormContainer>
         </form>
       </S.Card>
