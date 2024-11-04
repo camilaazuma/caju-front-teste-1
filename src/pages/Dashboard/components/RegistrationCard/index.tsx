@@ -5,8 +5,8 @@ import {
   HiOutlineTrash,
 } from "react-icons/hi";
 import { Registration, RegistrationStatus } from "~/types/registration";
-import { ButtonSmall, IconButton } from "@components";
-import { useRegistrationContext } from "@context";
+import { ButtonSmall, IconButton } from "@components/index";
+import { useRegistrationContext } from "@context/index";
 import * as S from "./styles";
 import RegistrationService from "~/services/registrationService";
 import { toast } from "react-toastify";

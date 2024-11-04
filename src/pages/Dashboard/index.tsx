@@ -4,7 +4,7 @@ import { SearchBar } from "./components/Searchbar";
 import useFetchRegistrations from "@hooks/useFetchRegistrations";
 import { Loading } from "~/components";
 import { useState } from "react";
-import { RegistrationProvider } from "@context";
+import { RegistrationProvider } from "@context/index";
 
 const DashboardPage = () => {
   const [cpf, setCpf] = useState<string>("");
