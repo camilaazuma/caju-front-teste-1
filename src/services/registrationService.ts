@@ -1,5 +1,5 @@
-import Registration, { RegistrationStatus } from "~/types/registration";
-import { get, post } from "./axios";
+import { Registration, RegistrationStatus } from "~/types/registration";
+import { get, post, put } from "./axios";
 import { sanitizeCPF } from "@helpers/fiscalDocumentHelper";
 
 const RegistrationService = {
@@ -17,6 +17,20 @@ const RegistrationService = {
         throw error;
       });
   },
+
+  updateRegistrationStatus(data: Registration, status: RegistrationStatus) {
+    const url = `/registrations/${data.id}`;
+
+    return put(url, {
+      ...data,
+      status,
+    })
+      .then((response) => response)
+      .catch((error) => {
+        throw error;
+      });
+  },
+
   getRegistrationsList() {
     const url = `/registrations`;
     return get(url, {})
