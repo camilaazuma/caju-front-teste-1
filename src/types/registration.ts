@@ -1,4 +1,4 @@
-export default interface Registration {
+export interface Registration {
   admissionDate: string;
   email: string;
   employeeName: string;

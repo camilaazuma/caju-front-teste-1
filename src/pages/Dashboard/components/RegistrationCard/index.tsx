@@ -6,6 +6,7 @@ import {
 } from "react-icons/hi";
 import { Registration, RegistrationStatus } from "~/types/registration";
 import { ButtonSmall, IconButton } from "@components";
+import { useRegistrationContext } from "@context";
 import * as S from "./styles";
 
 type Props = {
@@ -14,6 +15,7 @@ type Props = {
 
 const RegistrationCard = (props: Props) => {
   const { status, employeeName, email, admissionDate, id } = props.data;
+  const { refetch } = useRegistrationContext();
 
   return (
     <S.Card key={id}>
@@ -42,7 +44,7 @@ const RegistrationCard = (props: Props) => {
           )}
         </div>
 
-        <IconButton aria-label="delete card" onClick={() => {}} color="#000">
+        <IconButton aria-label="delete card" onClick={refetch} color="#000">
           <HiOutlineTrash size={16} />
         </IconButton>
       </S.Actions>

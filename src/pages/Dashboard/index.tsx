@@ -4,10 +4,10 @@ import { SearchBar } from "./components/Searchbar";
 import useFetchRegistrations from "@hooks/useFetchRegistrations";
 import { Loading } from "~/components";
 import { useState } from "react";
+import { RegistrationProvider } from "@context";
 
 const DashboardPage = () => {
   const [cpf, setCpf] = useState<string>("");
-
   const { data, loading, refetch } = useFetchRegistrations(cpf);
 
   if (loading) {
@@ -17,14 +17,16 @@ const DashboardPage = () => {
     return <div>No registrations found.</div>;
   }
   return (
-    <S.Container>
-      <SearchBar
-        searchString={cpf}
-        setSearchString={setCpf}
-        onRefetch={refetch}
-      />
-      <Columns registrations={data} />
-    </S.Container>
+    <RegistrationProvider onRefetch={refetch} cpf={cpf} setCpf={setCpf}>
+      <S.Container>
+        <SearchBar
+          searchString={cpf}
+          setSearchString={setCpf}
+          onRefetch={refetch}
+        />
+        <Columns registrations={data} />
+      </S.Container>
+    </RegistrationProvider>
   );
 };
 export default DashboardPage;
