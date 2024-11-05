@@ -1,23 +1,61 @@
-import { render, screen, fireEvent, cleanup } from "@testing-library/react";
-import { act } from "react";
-import "@testing-library/jest-dom";
-import { Router } from "react-router-dom";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  cleanup,
+} from "@testing-library/react";
 import { createMemoryHistory } from "history";
-import NewUserPage from "./";
+import { Router } from "react-router-dom";
+import NewUserPage from "./index";
+import { ToastContainer } from "react-toastify";
+import "@testing-library/jest-dom";
+
+jest.mock("@context/index", () => ({
+  useLoadingContext: () => ({ setAppLoading: jest.fn() }),
+  useConfirmationDialog: () => ({
+    getConfirmation: jest.fn().mockResolvedValue(true),
+  }),
+}));
+
+jest.mock("~/services/registrationService", () => ({
+  postNewRegistration: jest.fn(),
+}));
+import { postNewRegistration } from "~/services/registrationService";
 
 afterEach(() => {
   cleanup();
 });
 
 describe("NewUserPage", () => {
-  it("should render the form fields and submit button", () => {
+  const setup = () => {
     const history = createMemoryHistory();
     render(
       <Router history={history}>
         <NewUserPage />
+        <ToastContainer />
       </Router>
     );
+    return { history };
+  };
 
+  const fillForm = () => {
+    fireEvent.change(screen.getByLabelText(/Nome completo/i), {
+      target: { value: "Camila Azuma" },
+    });
+    fireEvent.change(screen.getByLabelText(/Email/i), {
+      target: { value: "camila.a@gmail.com" },
+    });
+    fireEvent.change(screen.getByLabelText(/CPF/i), {
+      target: { value: "123.456.789-09" },
+    });
+    fireEvent.change(screen.getByLabelText(/Data de admissão/i), {
+      target: { value: "2024-11-05" },
+    });
+  };
+
+  it("renders the NewUserPage form", () => {
+    setup();
     expect(screen.getByLabelText(/Nome completo/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/CPF/i)).toBeInTheDocument();
@@ -27,33 +65,42 @@ describe("NewUserPage", () => {
     ).toBeInTheDocument();
   });
 
-  it("should show validation errors when submitting empty form", async () => {
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <NewUserPage />
-      </Router>
-    );
-
-    await act(async () => {
-      fireEvent.click(screen.getByRole("button", { name: /Cadastrar/i }));
+  it("validates form fields", async () => {
+    setup();
+    fireEvent.click(screen.getByRole("button", { name: /Cadastrar/i }));
+    await waitFor(() => {
+      expect(screen.getAllByText(/Campo obrigatório/i)).toHaveLength(4);
     });
-
-    expect(await screen.findAllByText(/Campo obrigatório/i)).toHaveLength(4);
   });
 
-  it("should navigate to dashboard when back button is clicked", () => {
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <NewUserPage />
-      </Router>
-    );
+  it("submits the form with valid data", async () => {
+    const { history } = setup();
+    postNewRegistration.mockResolvedValue({});
 
-    act(() => {
-      fireEvent.click(screen.getByLabelText(/back/i));
+    fillForm();
+    fireEvent.click(screen.getByRole("button", { name: /Cadastrar/i }));
+
+    await waitFor(() => {
+      expect(
+        screen.getByText((content) => content.includes("Nova admissão criada"))
+      ).toBeInTheDocument();
+      expect(history.location.pathname).toBe("/dashboard");
     });
+  });
 
-    expect(history.location.pathname).toBe("/dashboard");
+  it("displays error message on failed submission", async () => {
+    postNewRegistration.mockRejectedValue({ code: "500" });
+
+    setup();
+    fillForm();
+    fireEvent.click(screen.getByRole("button", { name: /Cadastrar/i }));
+
+    await waitFor(() => {
+      expect(
+        screen.getByText((content) =>
+          content.includes("Houve um erro ao salvar os dados")
+        )
+      ).toBeInTheDocument();
+    });
   });
 });
