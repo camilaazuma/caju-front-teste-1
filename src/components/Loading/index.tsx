@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "~/styles/colors";
 
 export const Loading = styled.span<{
   color?: string;
@@ -6,9 +7,9 @@ export const Loading = styled.span<{
   width?: string;
   height?: string;
 }>`
-    border-color: ${(props) => props.bordercolor ?? "#fff"};
+    border-color: ${(props) => props.bordercolor ?? colors.white};
     border-style: solid;
-    border-bottom-color: ${(props) => props.color ?? "#000"};
+    border-bottom-color: ${(props) => props.color ?? colors.black};
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;

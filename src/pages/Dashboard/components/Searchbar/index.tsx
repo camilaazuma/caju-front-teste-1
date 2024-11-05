@@ -7,6 +7,7 @@ import { useState } from "react";
 import MaskHelper from "@helpers/maskHelper";
 import { validateCPF } from "@helpers/fiscalDocumentHelper";
 import PropTypes from "prop-types";
+import colors from "@colors";
 
 interface SearchBarProps {
   searchString: string;
@@ -61,7 +62,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         <IconButton
           aria-label="refetch"
           onClick={clearSearch}
-          color="#e80537"
+          color={colors.error}
           aria-disabled={cpf.length === 0}
           disabled={cpf.length === 0}
         >

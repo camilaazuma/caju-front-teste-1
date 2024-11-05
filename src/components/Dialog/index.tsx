@@ -2,6 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 import Button from "../Buttons";
+import colors from "@colors";
 
 const Overlay = styled.div`
   position: fixed;
@@ -68,7 +69,7 @@ const Dialog: React.FC<DialogProps> = ({
               <h2>{title}</h2>
               {message && <p>{message}</p>}
               <Actions>
-                <Button onClick={onDismiss} bgcolor="#e80537">
+                <Button onClick={onDismiss} bgcolor={colors.error}>
                   {dismissLabel ?? "Cancelar"}
                 </Button>
                 <Button onClick={onConfirm}>{okLabel ?? "Ok"}</Button>

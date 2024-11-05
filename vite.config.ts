@@ -19,6 +19,7 @@ export default defineConfig({
       "@helpers": path.resolve(__dirname, "./src/helpers"),
       "@types": path.resolve(__dirname, "./src/types"),
       "@context": path.resolve(__dirname, "./src/context"),
+      "@colors": path.resolve(__dirname, "./src/styles/colors"),
     },
   },
 });

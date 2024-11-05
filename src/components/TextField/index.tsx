@@ -1,5 +1,6 @@
 import { InputHTMLAttributes } from "react";
 import styled from "styled-components";
+import colors from "~/styles/colors";
 
 export const Input = styled.input<{
   width?: number | string | undefined;
@@ -9,7 +10,7 @@ export const Input = styled.input<{
   border-radius: 2px;
   width: ${(props) => props.width ?? ""};
   min-height: 36px;
-  background-color: #ffffff;
+  background-color: ${colors.white};
   border: 1px solid rgba(36, 28, 21, 0.3);
   transition: all 0.2s ease-in-out 0s;
   font-size: 16px;
@@ -38,7 +39,7 @@ const TextField = ({ label, error, errorMessage, ...rest }: Props) => {
       <label htmlFor={rest.id}>{label}</label>
       <Input {...rest} />
       {error && (
-        <span style={{ fontSize: 12, color: "red" }} role="alert">
+        <span style={{ fontSize: 12, color: colors.error }} role="alert">
           {errorMessage}
         </span>
       )}

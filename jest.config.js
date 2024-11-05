@@ -16,5 +16,6 @@ export default {
     "^@helpers/(.*)$": "<rootDir>/src/helpers/$1",
     "^@types/(.*)$": "<rootDir>/src/types/$1",
     "^@context/(.*)$": "<rootDir>/src/context/$1",
+    "^@colors": "<rootDir>/src/styles/colors",
   },
 };

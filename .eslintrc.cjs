@@ -23,6 +23,7 @@ module.exports = {
           ["@helpers", "./src/helpers"],
           ["@types", "./src/types"],
           ["@context", "./src/context"],
+          ["@colors", "./src/styles/colors"],
         ],
         extensions: [".js", ".jsx", ".ts", ".tsx"],
       },

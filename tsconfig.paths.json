@@ -10,6 +10,7 @@
             "@helpers/*": ["src/helpers/*"],
             "@types/*": ["src/types/*"],
             "@context/*": ["src/context/*"],
+            "@colors": ["src/styles/colors"],
         }
     }
 }
