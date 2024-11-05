@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const Loading = styled.span<{
   color?: string;
-  borderColor?: string;
+  bordercolor?: string;
   width?: string;
   height?: string;
 }>`
-    border-color: ${(props) => props.borderColor ?? "#fff"};
+    border-color: ${(props) => props.bordercolor ?? "#fff"};
     border-style: solid;
     border-bottom-color: ${(props) => props.color ?? "#000"};
     border-radius: 50%;

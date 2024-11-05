@@ -18,7 +18,7 @@ export const AppLoading = () => {
     <_AppLoadingStyled>
       <Loading
         color="#fff"
-        borderColor="#e80435"
+        bordercolor="#e80435"
         width="1.75rem"
         height="1.75rem"
       />

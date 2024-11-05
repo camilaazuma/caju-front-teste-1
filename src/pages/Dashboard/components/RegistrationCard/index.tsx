@@ -40,7 +40,7 @@ const RegistrationCard = ({ data }: Props) => {
         toast.success("Registro excluído");
       })
       .catch((error) => {
-        toast.error(`Houve um erro ao remover o card. ${error.code}`);
+        toast.error(`Houve um erro ao remover o registro. ${error.code}`);
       });
   };
 

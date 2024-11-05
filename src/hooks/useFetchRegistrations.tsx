@@ -1,4 +1,6 @@
+import { AxiosError } from "axios";
 import { useEffect, useState, useCallback } from "react";
+import { toast } from "react-toastify";
 import RegistrationService from "~/services/registrationService";
 
 const useFetchRegistrations = (cpf: string = "") => {
@@ -13,7 +15,11 @@ const useFetchRegistrations = (cpf: string = "") => {
         : await RegistrationService.getRegistrationsList();
       setData(response);
     } catch (error) {
-      console.error("API request failed", error);
+      toast.error(
+        `Houve um erro ao carregar os dados. ${
+          error instanceof AxiosError ? error.code : ""
+        }`
+      );
     } finally {
       setLoading(false);
     }

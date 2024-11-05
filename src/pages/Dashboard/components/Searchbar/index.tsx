@@ -1,11 +1,12 @@
 import { HiRefresh, HiX } from "react-icons/hi";
 import { useHistory } from "react-router-dom";
-import { Button, IconButton, TextField } from "@components";
+import { Button, IconButton, TextField } from "@components/index";
 import routes from "@router/routes";
 import * as S from "./styles";
 import { useState } from "react";
 import MaskHelper from "@helpers/maskHelper";
 import { validateCPF } from "@helpers/fiscalDocumentHelper";
+import PropTypes from "prop-types";
 
 interface SearchBarProps {
   searchString: string;
@@ -38,6 +39,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       setSearchString("");
     }
   };
+
   const clearSearch = () => {
     if (isValid) {
       setSearchString("");
@@ -75,4 +77,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       </S.Actions>
     </S.Container>
   );
+};
+
+SearchBar.propTypes = {
+  searchString: PropTypes.string.isRequired,
+  setSearchString: PropTypes.func.isRequired,
+  onRefetch: PropTypes.func.isRequired,
 };

@@ -33,7 +33,7 @@ export const RegistrationProvider: React.FC<{
 }> = ({ children, onRefetch, cpf, setCpf }) => {
   const refetch = useCallback(() => {
     onRefetch();
-  }, []);
+  }, [onRefetch]);
 
   return (
     <RegistrationContext.Provider value={{ refetch, cpf, setCpf }}>
