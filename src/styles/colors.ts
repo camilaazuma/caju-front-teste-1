@@ -1,6 +1,9 @@
 const colors = {
   success: "#64a98c",
-  error: "#e80537",
+  error: "#f44336",
+  lightGreen: "#9be59b",
+  lightRed: "#ff919a",
+  orange: "#ff8858",
   white: "#ffffff",
   black: "#000000",
   focusBorder: "#007c89",

@@ -14,6 +14,7 @@ import {
 import * as S from "./styles";
 import RegistrationService from "~/services/registrationService";
 import { toast } from "react-toastify";
+import colors from "@colors";
 
 type Props = {
   data: Registration;
@@ -84,7 +85,7 @@ const RegistrationCard = ({ data }: Props) => {
           {data.status === RegistrationStatus.REVIEW && (
             <>
               <ButtonSmall
-                bgcolor="rgb(255, 145, 154)"
+                bgcolor={colors.lightRed}
                 onClick={() =>
                   updateCardStatus(
                     data,
@@ -96,7 +97,7 @@ const RegistrationCard = ({ data }: Props) => {
                 Reprovar
               </ButtonSmall>
               <ButtonSmall
-                bgcolor="rgb(155, 229, 155)"
+                bgcolor={colors.lightGreen}
                 onClick={() =>
                   updateCardStatus(
                     data,
@@ -111,7 +112,7 @@ const RegistrationCard = ({ data }: Props) => {
           )}
           {data.status !== RegistrationStatus.REVIEW && (
             <ButtonSmall
-              bgcolor="#ff8858"
+              bgcolor={colors.orange}
               onClick={() =>
                 updateCardStatus(
                   data,
