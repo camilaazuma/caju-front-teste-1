@@ -10,6 +10,7 @@ import { Router } from "react-router-dom";
 import NewUserPage from "./index";
 import { ToastContainer } from "react-toastify";
 import "@testing-library/jest-dom";
+import RegistrationService from "~/services/registrationService";
 
 jest.mock("@context/index", () => ({
   useLoadingContext: () => ({ setAppLoading: jest.fn() }),
@@ -19,9 +20,8 @@ jest.mock("@context/index", () => ({
 }));
 
 jest.mock("~/services/registrationService", () => ({
-  postNewRegistration: jest.fn(),
+  postNewRegistration: jest.fn().mockResolvedValue({}),
 }));
-import { postNewRegistration } from "~/services/registrationService";
 
 afterEach(() => {
   cleanup();
@@ -75,8 +75,6 @@ describe("NewUserPage", () => {
 
   it("submits the form with valid data", async () => {
     const { history } = setup();
-    postNewRegistration.mockResolvedValue({});
-
     fillForm();
     fireEvent.click(screen.getByRole("button", { name: /Cadastrar/i }));
 
@@ -89,8 +87,9 @@ describe("NewUserPage", () => {
   });
 
   it("displays error message on failed submission", async () => {
-    postNewRegistration.mockRejectedValue({ code: "500" });
-
+    (RegistrationService.postNewRegistration as jest.Mock).mockRejectedValue({
+      code: "500",
+    });
     setup();
     fillForm();
     fireEvent.click(screen.getByRole("button", { name: /Cadastrar/i }));
