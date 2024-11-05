@@ -12,6 +12,14 @@ export default defineConfig({
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "src"),
+      "@components": path.resolve(__dirname, "./src/components"),
+      "@pages": path.resolve(__dirname, "./src/pages"),
+      "@hooks": path.resolve(__dirname, "./src/hooks"),
+      "@router": path.resolve(__dirname, "./src/router"),
+      "@helpers": path.resolve(__dirname, "./src/helpers"),
+      "@types": path.resolve(__dirname, "./src/types"),
+      "@context": path.resolve(__dirname, "./src/context"),
+      "@colors": path.resolve(__dirname, "./src/styles/colors"),
     },
   },
 });

@@ -1,19 +1,20 @@
 import styled from "styled-components";
+import colors from "~/styles/colors";
 
 export const Card = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  border: 4px solid #fff;
+  border: 4px solid ${colors.white};
   margin: 16px;
   border-radius: 8px;
   padding: 16px;
-  background-color: #fff;
+  background-color: ${colors.white};
   h3,
   p {
     margin: 0;
   }
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 `;
 
 export const IconAndText = styled.div`
@@ -29,7 +30,8 @@ export const Actions = styled.div`
   align-items: center;
   gap: 4px;
 
-  svg {
-    cursor: pointer;
+  button {
+    border: none;
+    margin-right: 4px;
   }
 `;

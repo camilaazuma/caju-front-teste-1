@@ -2,9 +2,15 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "~/*": [
-                "./src/*"
-            ]
+            "~/*": ["./src/*"],
+            "@components/*": ["src/components/*"],
+            "@pages/*": ["src/pages/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@router/*": ["src/router/*"],
+            "@helpers/*": ["src/helpers/*"],
+            "@types/*": ["src/types/*"],
+            "@context/*": ["src/context/*"],
+            "@colors": ["src/styles/colors"],
         }
     }
 }

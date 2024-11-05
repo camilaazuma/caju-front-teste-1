@@ -1,0 +1,3 @@
+[submodule "json-server-deploy"]
+	path = json-server-deploy
+	url = https://github.com/camilaazuma/json-server-deploy.git

@@ -1,18 +1,19 @@
 import styled from "styled-components";
+import colors from "@colors";
 const registrationStatusStyles: {
   [key in string]: { background: string; title: string };
 } = {
   REVIEW: {
-    background: "#FDF8E9",
-    title: "#EFC24D",
+    background: colors.reviewBackground,
+    title: colors.reviewTitle,
   },
   APPROVED: {
-    background: "#EEEEFD",
-    title: "#4242DF",
+    background: colors.approvedBackground,
+    title: colors.approvedTitle,
   },
   REPROVED: {
-    background: "#FBEDF6",
-    title: "#CE2893",
+    background: colors.reprovedBackground,
+    title: colors.reprovedTitle,
   },
 };
 
@@ -39,7 +40,7 @@ export const TitleColumn = styled.h3<{ status: any }>`
   margin: 24px;
 `;
 
-export const CollumContent = styled.div`
+export const CollumnContent = styled.div`
   overflow: auto;
   max-height: 85%;
 `;

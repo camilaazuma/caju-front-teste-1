@@ -8,7 +8,14 @@ export default {
     "^.+\\.(js|jsx)$": "babel-jest",
   },
   moduleNameMapper: {
-    "^~/(.+)": "<rootDir>/src/$1",
+    "^~/(.*)$": "<rootDir>/src/$1",
+    "^@components/(.*)$": "<rootDir>/src/components/$1",
+    "^@pages/(.*)$": "<rootDir>/src/pages/$1",
+    "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",
+    "^@router/(.*)$": "<rootDir>/src/router/$1",
+    "^@helpers/(.*)$": "<rootDir>/src/helpers/$1",
+    "^@types/(.*)$": "<rootDir>/src/types/$1",
+    "^@context/(.*)$": "<rootDir>/src/context/$1",
+    "^@colors": "<rootDir>/src/styles/colors",
   },
-//   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
 };

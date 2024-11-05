@@ -7,6 +7,13 @@ export const Container = styled.div`
   gap: 16px;
 `;
 
+export const SearchBarContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+`;
+
 export const Actions = styled.div`
   display: flex;
   justify-content: flex-end;
