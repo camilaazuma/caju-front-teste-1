@@ -2,8 +2,7 @@
 import axios, { AxiosResponse } from "axios";
 
 const api = axios.create({
-  // baseURL: process.env.REACT_APP_API_URL,
-  baseURL: "http://localhost:3000",
+  baseURL: import.meta.env.VITE_REACT_APP_API_URL,
   withCredentials: true,
   xsrfCookieName: "csrftoken",
   xsrfHeaderName: "X-CSRFToken",
