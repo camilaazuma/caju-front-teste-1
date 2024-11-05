@@ -40,7 +40,7 @@ export const validateCPF = (cpf: string): boolean => {
   const arrCPF: number[] = Array.from(filteredCPF, Number);
 
   const repeatedNumbers: boolean = arrCPF.every(
-    (num, i, arr) => num === arr[0]
+    (num, _i, arr) => num === arr[0]
   );
   if (repeatedNumbers) {
     return false;
