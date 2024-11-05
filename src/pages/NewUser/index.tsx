@@ -10,7 +10,7 @@ import MaskHelper from "@helpers/maskHelper";
 import RegistrationService from "~/services/registrationService";
 import { toast } from "react-toastify";
 import { formatDate } from "@helpers/dateHelper";
-import { useLoadingContext } from "@context/index";
+import { useConfirmationDialog, useLoadingContext } from "@context/index";
 
 const NewUserSchema = Yup.object().shape({
   name: Yup.string()
@@ -37,6 +37,7 @@ const NewUserSchema = Yup.object().shape({
 const NewUserPage = () => {
   const history = useHistory();
   const { setAppLoading } = useLoadingContext();
+  const { getConfirmation } = useConfirmationDialog();
 
   const goToHome = () => {
     history.push(routes.dashboard);
@@ -53,23 +54,29 @@ const NewUserPage = () => {
     initialValues: emptyData,
     validationSchema: NewUserSchema,
     onSubmit: async (values) => {
-      setAppLoading(true);
-      const registrationData = {
-        admissionDate: formatDate(values.admission_date),
-        employeeName: values.name,
-        cpf: values.fiscal_document,
-        email: values.email,
-      };
-      RegistrationService.postNewRegistration(registrationData)
-        .then(() => {
-          toast.success("Nova admissão criada.");
-          setAppLoading(false);
-          goToHome();
-        })
-        .catch((error) => {
-          toast.error(`Houve um erro ao salvar os dados. ${error.code}`);
-          setAppLoading(false);
-        });
+      const confirmed = await getConfirmation({
+        title: "Confirmação de novo registro",
+      });
+
+      if (confirmed) {
+        setAppLoading(true);
+        const registrationData = {
+          admissionDate: formatDate(values.admission_date),
+          employeeName: values.name,
+          cpf: values.fiscal_document,
+          email: values.email,
+        };
+        RegistrationService.postNewRegistration(registrationData)
+          .then(() => {
+            toast.success("Nova admissão criada.");
+            setAppLoading(false);
+            goToHome();
+          })
+          .catch((error) => {
+            toast.error(`Houve um erro ao salvar os dados. ${error.code}`);
+            setAppLoading(false);
+          });
+      }
     },
   });
 

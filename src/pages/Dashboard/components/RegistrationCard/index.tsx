@@ -6,7 +6,11 @@ import {
 } from "react-icons/hi";
 import { Registration, RegistrationStatus } from "~/types/registration";
 import { ButtonSmall, IconButton } from "@components/index";
-import { useLoadingContext, useRegistrationContext } from "@context/index";
+import {
+  useConfirmationDialog,
+  useLoadingContext,
+  useRegistrationContext,
+} from "@context/index";
 import * as S from "./styles";
 import RegistrationService from "~/services/registrationService";
 import { toast } from "react-toastify";
@@ -18,30 +22,47 @@ type Props = {
 const RegistrationCard = ({ data }: Props) => {
   const { refetch } = useRegistrationContext();
   const { setAppLoading } = useLoadingContext();
+  const { getConfirmation } = useConfirmationDialog();
 
-  const updateCardStatus = (data: Registration, status: RegistrationStatus) => {
-    setAppLoading(true);
-    RegistrationService.updateRegistrationStatus(data, status)
-      .then(async () => {
-        await refetch();
-        toast.success("Status atualizado");
-        setAppLoading(false);
-      })
-      .catch((error) => {
-        toast.error(`Houve um erro ao atualizar o status. ${error.code}`);
-        setAppLoading(false);
-      });
+  const updateCardStatus = async (
+    data: Registration,
+    status: RegistrationStatus,
+    message: string
+  ) => {
+    const confirmed = await getConfirmation({
+      title: message,
+    });
+
+    if (confirmed) {
+      setAppLoading(true);
+      RegistrationService.updateRegistrationStatus(data, status)
+        .then(async () => {
+          await refetch();
+          toast.success("Status atualizado");
+          setAppLoading(false);
+        })
+        .catch((error) => {
+          toast.error(`Houve um erro ao atualizar o status. ${error.code}`);
+          setAppLoading(false);
+        });
+    }
   };
 
-  const deleteCard = (id: string) => {
-    RegistrationService.deleteRegistration(id)
-      .then(async () => {
-        await refetch();
-        toast.success("Registro excluído");
-      })
-      .catch((error) => {
-        toast.error(`Houve um erro ao remover o registro. ${error.code}`);
-      });
+  const deleteCard = async (id: string) => {
+    const confirmed = await getConfirmation({
+      title: "Deseja remover o registro?",
+    });
+
+    if (confirmed) {
+      RegistrationService.deleteRegistration(id)
+        .then(async () => {
+          await refetch();
+          toast.success("Registro excluído");
+        })
+        .catch((error) => {
+          toast.error(`Houve um erro ao remover o registro. ${error.code}`);
+        });
+    }
   };
 
   return (
@@ -65,7 +86,11 @@ const RegistrationCard = ({ data }: Props) => {
               <ButtonSmall
                 bgcolor="rgb(255, 145, 154)"
                 onClick={() =>
-                  updateCardStatus(data, RegistrationStatus.REPROVED)
+                  updateCardStatus(
+                    data,
+                    RegistrationStatus.REPROVED,
+                    "Deseja reprovar o registro?"
+                  )
                 }
               >
                 Reprovar
@@ -73,7 +98,11 @@ const RegistrationCard = ({ data }: Props) => {
               <ButtonSmall
                 bgcolor="rgb(155, 229, 155)"
                 onClick={() =>
-                  updateCardStatus(data, RegistrationStatus.APPROVED)
+                  updateCardStatus(
+                    data,
+                    RegistrationStatus.APPROVED,
+                    "Deseja aprovar o registro?"
+                  )
                 }
               >
                 Aprovar
@@ -83,7 +112,13 @@ const RegistrationCard = ({ data }: Props) => {
           {data.status !== RegistrationStatus.REVIEW && (
             <ButtonSmall
               bgcolor="#ff8858"
-              onClick={() => updateCardStatus(data, RegistrationStatus.REVIEW)}
+              onClick={() =>
+                updateCardStatus(
+                  data,
+                  RegistrationStatus.REVIEW,
+                  "Deseja revisar o registro novamente?"
+                )
+              }
             >
               Revisar novamente
             </ButtonSmall>
