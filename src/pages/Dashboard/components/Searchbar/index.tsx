@@ -60,7 +60,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           width="auto"
         />
         <IconButton
-          aria-label="refetch"
+          aria-label="Limpar busca"
           onClick={clearSearch}
           color={colors.error}
           aria-disabled={cpf.length === 0}
@@ -71,7 +71,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       </S.SearchBarContainer>
 
       <S.Actions>
-        <IconButton aria-label="refetch" onClick={onRefetch}>
+        <IconButton aria-label="Atualizar dados" onClick={onRefetch}>
           <HiRefresh />
         </IconButton>
         <Button onClick={goToNewAdmissionPage}>Nova Admissão</Button>

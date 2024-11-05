@@ -85,6 +85,7 @@ const RegistrationCard = ({ data }: Props) => {
           {data.status === RegistrationStatus.REVIEW && (
             <>
               <ButtonSmall
+                aria-label="Atualizar status para Reprovado"
                 bgcolor={colors.lightRed}
                 onClick={() =>
                   updateCardStatus(
@@ -97,6 +98,7 @@ const RegistrationCard = ({ data }: Props) => {
                 Reprovar
               </ButtonSmall>
               <ButtonSmall
+                aria-label="Atualizar status para Aprovado"
                 bgcolor={colors.lightGreen}
                 onClick={() =>
                   updateCardStatus(
@@ -112,6 +114,7 @@ const RegistrationCard = ({ data }: Props) => {
           )}
           {data.status !== RegistrationStatus.REVIEW && (
             <ButtonSmall
+              aria-label="Atualizar status para Review"
               bgcolor={colors.orange}
               onClick={() =>
                 updateCardStatus(
@@ -127,7 +130,7 @@ const RegistrationCard = ({ data }: Props) => {
         </div>
 
         <IconButton
-          aria-label="delete card"
+          aria-label="Deletar registro"
           onClick={() => deleteCard(data.id ?? "")}
           color="#000"
         >

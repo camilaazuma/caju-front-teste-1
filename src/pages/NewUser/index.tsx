@@ -83,7 +83,7 @@ const NewUserPage = () => {
   return (
     <S.Container>
       <S.Card>
-        <IconButton onClick={() => goToHome()} aria-label="back">
+        <IconButton onClick={() => goToHome()} aria-label="Voltar">
           <HiOutlineArrowLeft size={24} />
         </IconButton>
 

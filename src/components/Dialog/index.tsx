@@ -65,14 +65,24 @@ const Dialog: React.FC<DialogProps> = ({
       {isOpen &&
         createPortal(
           <Overlay>
-            <DialogContainer>
-              <h2>{title}</h2>
-              {message && <p>{message}</p>}
+            <DialogContainer
+              role="dialog"
+              aria-labelledby="dialog-title"
+              aria-describedby="dialog-description"
+            >
+              <h2 id="dialog-title">{title}</h2>
+              {message && <p id="dialog-description">{message}</p>}
               <Actions>
-                <Button onClick={onDismiss} bgcolor={colors.error}>
+                <Button
+                  onClick={onDismiss}
+                  bgcolor={colors.error}
+                  aria-label="Cancelar"
+                >
                   {dismissLabel ?? "Cancelar"}
                 </Button>
-                <Button onClick={onConfirm}>{okLabel ?? "Ok"}</Button>
+                <Button onClick={onConfirm} aria-label="Confirmar">
+                  {okLabel ?? "Confirmar"}
+                </Button>
               </Actions>
             </DialogContainer>
           </Overlay>,
