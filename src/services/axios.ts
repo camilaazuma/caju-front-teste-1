@@ -2,7 +2,7 @@
 import axios, { AxiosResponse } from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_REACT_APP_API_URL,
+  baseURL: "https://shining-typhoon-bulb.glitch.me",
   withCredentials: true,
   xsrfCookieName: "csrftoken",
   xsrfHeaderName: "X-CSRFToken",
