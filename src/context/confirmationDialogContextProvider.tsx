@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react";
-import { Dialog } from "~/components";
+import { Dialog } from "@components";
 
 interface ConfirmationDialogContextProps {
   openDialog: (config: DialogConfig) => void;
