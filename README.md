@@ -1,4 +1,3 @@
-
 # Caju Front End Teste
 
 Esse é um desafio técnico para você demonstrar suas habilidades como frontend, sua missão será dar continuidade ao desenvolvimento da plataforma de admissão que consiste em duas telas, a tela de `Dashboard` e uma tela de `Cadastro`.
@@ -20,25 +19,23 @@ A tela de `Cadastro` exibe um formulário simples que será utilizado para criar
 O desafio é aprimorar o código existente e implementar as funcionalidades que estão incompletas, use a sua experiência para identificar e propor soluções para os problemas encontrados.
 Sinta-se a vontade para refatorar, criar novas pastas, componentes, hooks, utils e o que mais achar necessário para garantir que o projeto esteja organizado e segue as boas práticas de desenvolvimento.
 
-
 ## Especificações
 
 ### Tela Dashboard
-  
+
 - Implementar `GET` ao carregar a pagina e ao fazer pequisa por `CPF`
 - Filtrar os cards por coluna, usando o status.
 - Implementar `PUT` ao clicar em Reprovar e alterar o status para `REPROVED`
 - Implementar `PUT` ao clicar em Aprovar e alterar o status para `APPROVED`
 - Implementar `PUT` ao clicar em Revisar novamente e alterar o status para `REVIEW`
 - Implementar `DELETE` ao clicar no lixeira no card.
-- O botão de `Reprovar` e `Aprovar` só deve aparecer em admissões com o status `REVIEW` 
+- O botão de `Reprovar` e `Aprovar` só deve aparecer em admissões com o status `REVIEW`
 - O botão `Revisar novamente` só deve aparecer em admissões com o status `REPROVED` ou `APPROVED`
 - Implementar um loading na tela ao realizar requisições.
 - Todas as ações devem ter modal de confirmação e uma notificação de sucesso ou erro
 - Na pesquisa por CPF realizar a requisição automaticamente ao preencher um CPF válido
 - Adicionar máscara de CPF no campo de pesquisa.
 - Atualizar os dados (refetch) ao clicar no ícone de atualizar
-
 
 ### Tela Cadastro
 
@@ -48,8 +45,8 @@ Sinta-se a vontade para refatorar, criar novas pastas, componentes, hooks, utils
 - Implementar `POST` ao preencher todos os campos corretamentes.
 - Redirecionar ao `/dashboard` ao criar uma nova admissão.
 
-
 ## API
+
 Você consumirá uma API mockada localmente, que será executada utilizando o json-server. Para mais informações consulte a [documentação](https://github.com/typicode/json-server/).
 
 Exemplo de Requisição:
@@ -70,11 +67,10 @@ Para realizar a pesquisa por CPF, utilize essa funcionalidade do json-web-server
 <br/>
 https://github.com/typicode/json-server/tree/v0?tab=readme-ov-file#filter
 
-
 ## Extras (opcional)
 
 - Testes Unitários e de Integração `(Obrigátorio para Senior e Tech Lead)`
-- End-to-End (E2E) 
+- End-to-End (E2E)
 - Configuração de CI/CD com deploy automatizado
 
 ## Dicas e sugestões
@@ -137,6 +133,27 @@ Caso necessite executar a suíte de testes use o comando abaixo:
 yarn test:dev
 ```
 
-
 Para concluir o desenvolvimento faça as edições necessárias e depois envie a URL do novo repositório com suas alterações para o RH.
 
+## Informações sobre o deploy
+
+- Um preview do projeto foi publicado utilizando o Netlify, podendo ser acessado pela URL:
+  - https://zippy-axolotl-e0e044.netlify.app/
+- Um mock da api foi publicada utilizando o [Glitch](https://glitch.com/) e um fork do projeto [json-server-deploy](https://github.com/ikramdeveloper/json-server-deploy)
+  - O server pode ser acessado pela URL: https://shining-typhoon-bulb.glitch.me
+  - **Por uma limitação da plataforma, o mock server fica inativo por padrão e é ativado ao receber requisições**. O primeiro acesso à aplicação demora alguns segundos, mas esse tempo reduz após inicializado.
+
+## Sugestões de melhorias futuras
+
+### Objetivos de Curto Prazo:
+
+- Integrar com uma API backend real para uso em produção.
+- Implementar funcionalidade de busca com debounce para melhorar o desempenho.
+- Adicionar paginação ao `Dashboard` para lidar com grandes conjuntos de dados.
+- Aumentar a cobertura de testes para casos extremos e cenários de erro.
+
+### Objetivos de Longo Prazo:
+
+- Melhorar o design da interface para melhor usabilidade e estética.
+- Migrar para uma biblioteca de gerenciamento de estado como Redux para melhor escalabilidade.
+- Implementar autenticação e autorização de usuários para acesso seguro.
