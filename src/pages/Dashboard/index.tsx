@@ -3,7 +3,7 @@ import * as S from "./styles";
 import { SearchBar } from "./components/Searchbar";
 import useFetchRegistrations from "@hooks/useFetchRegistrations";
 import { useEffect, useState } from "react";
-import { RegistrationProvider, useLoadingContext } from "@context/index";
+import { RegistrationProvider, useLoadingContext } from "@context";
 
 const DashboardPage = () => {
   const [cpf, setCpf] = useState<string>("");

@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useEffect, useState, useCallback } from "react";
 import { toast } from "react-toastify";
-import RegistrationService from "~/services/registrationService";
+import { RegistrationService } from "@services";
 
 const useFetchRegistrations = (cpf: string = "") => {
   const [data, setData] = useState<any>(null);

@@ -1,8 +1,8 @@
 import Router from "~/router";
-import { Header } from "@components/index";
+import { Header } from "@components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ConfirmationDialogProvider, LoadingProvider } from "@context/index";
+import { ConfirmationDialogProvider, LoadingProvider } from "@context";
 
 function App() {
   return (

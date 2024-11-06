@@ -1,16 +1,16 @@
 import { useHistory } from "react-router-dom";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import { Button, IconButton, TextField } from "@components/index";
+import { Button, IconButton, TextField } from "@components";
 import routes from "@router/routes";
 import * as S from "./styles";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { validateCPF } from "@helpers/fiscalDocumentHelper";
 import MaskHelper from "@helpers/maskHelper";
-import RegistrationService from "~/services/registrationService";
+import { RegistrationService } from "@services";
 import { toast } from "react-toastify";
 import { formatDate } from "@helpers/dateHelper";
-import { useConfirmationDialog, useLoadingContext } from "@context/index";
+import { useConfirmationDialog, useLoadingContext } from "@context";
 
 const NewUserSchema = Yup.object().shape({
   name: Yup.string()

@@ -10,7 +10,7 @@ import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import DashboardPage from "./";
 import useFetchRegistrations from "@hooks/useFetchRegistrations";
-import { ConfirmationDialogProvider } from "@context/confirmationDialogContextProvider";
+import { ConfirmationDialogProvider } from "@context";
 import registrationsMock from "./mocks/registrationsMock";
 
 jest.mock("@hooks/useFetchRegistrations");

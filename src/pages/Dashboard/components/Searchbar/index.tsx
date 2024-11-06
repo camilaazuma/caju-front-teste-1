@@ -1,6 +1,6 @@
 import { HiRefresh, HiX } from "react-icons/hi";
 import { useHistory } from "react-router-dom";
-import { Button, IconButton, TextField } from "@components/index";
+import { Button, IconButton, TextField } from "@components";
 import routes from "@router/routes";
 import * as S from "./styles";
 import { useState } from "react";
