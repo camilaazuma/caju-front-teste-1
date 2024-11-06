@@ -16,14 +16,15 @@ module.exports = {
       alias: {
         map: [
           ["~", "./src"],
-          ["@components", "./src/components"],
+          ["@components", "./src/components/index"],
           ["@pages", "./src/pages"],
           ["@hooks", "./src/hooks"],
           ["@router", "./src/router"],
           ["@helpers", "./src/helpers"],
           ["@types", "./src/types"],
-          ["@context", "./src/context"],
+          ["@context", "./src/context/index"],
           ["@colors", "./src/styles/colors"],
+          ["@services", "./src/services/index"],
         ],
         extensions: [".js", ".jsx", ".ts", ".tsx"],
       },

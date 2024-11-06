@@ -5,14 +5,14 @@ import {
   HiOutlineTrash,
 } from "react-icons/hi";
 import { Registration, RegistrationStatus } from "~/types/registration";
-import { ButtonSmall, IconButton } from "@components/index";
+import { ButtonSmall, IconButton } from "@components";
 import {
   useConfirmationDialog,
   useLoadingContext,
   useRegistrationContext,
-} from "@context/index";
+} from "@context";
 import * as S from "./styles";
-import RegistrationService from "~/services/registrationService";
+import { RegistrationService } from "@services";
 import { toast } from "react-toastify";
 import colors from "@colors";
 

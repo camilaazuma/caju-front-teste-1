@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react";
-import { AppLoading } from "@components/index";
+import { AppLoading } from "@components";
 import PropTypes from "prop-types";
 
 const LoadingContext = createContext({

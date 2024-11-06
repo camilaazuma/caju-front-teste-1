@@ -10,7 +10,7 @@ import { Router } from "react-router-dom";
 import NewUserPage from "./index";
 import { ToastContainer } from "react-toastify";
 import "@testing-library/jest-dom";
-import RegistrationService from "~/services/registrationService";
+import { RegistrationService } from "@services";
 
 jest.mock("@context/index", () => ({
   useLoadingContext: () => ({ setAppLoading: jest.fn() }),
