@@ -37,7 +37,7 @@ const TextField = ({ label, error, errorMessage, ...rest }: Props) => {
   return (
     <div>
       <label htmlFor={rest.id}>{label}</label>
-      <Input {...rest} />
+      <Input aria-label={label} {...rest} />
       {error && (
         <span style={{ fontSize: 12, color: colors.error }} role="alert">
           {errorMessage}

@@ -74,7 +74,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         <IconButton aria-label="Atualizar dados" onClick={onRefetch}>
           <HiRefresh />
         </IconButton>
-        <Button onClick={goToNewAdmissionPage}>Nova Admissão</Button>
+        <Button aria-label="Nova Admissão" onClick={goToNewAdmissionPage}>
+          Nova Admissão
+        </Button>
       </S.Actions>
     </S.Container>
   );
